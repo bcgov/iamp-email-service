@@ -18,6 +18,7 @@ public class SwaggerConfig {
           .select()
           .apis(RequestHandlerSelectors.basePackage("ca.bc.gov.iamp.email.api"))
           .paths(PathSelectors.any())
-          .build();                                           
+          .build()
+          .useDefaultResponseMessages(false);                                           
     }
 }

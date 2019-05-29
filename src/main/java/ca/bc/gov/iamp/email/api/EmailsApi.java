@@ -27,7 +27,6 @@ import javax.validation.constraints.*;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2019-05-29T14:23:29.467-04:00")
 
 @Api(value = "emails", description = "the emails API")
 public interface EmailsApi {
@@ -48,7 +47,9 @@ public interface EmailsApi {
 
     @ApiOperation(value = "Sends a new email", nickname = "emailsPost", notes = "Endpoint used to send new emails", tags={  })
     @ApiResponses(value = { 
-        @ApiResponse(code = 201, message = "CREATED") })
+        @ApiResponse(code = 200, message = "OK: Email was sent sucessfully"),
+        @ApiResponse(code = 400, message = "BAD_REQUEST: One or more destination addresses are incorrect"),
+        @ApiResponse(code = 500, message = "INTERNAL_ERROR: Unknown error occured") })
     @RequestMapping(value = "/emails",
         consumes = { "multipart/form-data" },
         method = RequestMethod.POST)

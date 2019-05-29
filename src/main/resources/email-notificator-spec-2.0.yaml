@@ -1,7 +1,7 @@
 swagger: "2.0"
 info:
   title: Email Service API
-  description: Email Service API
+  description: This API is responsible for sending emails.
   version: 1.0.0
 basePath: /api/v1
 schemes:
@@ -54,5 +54,9 @@ paths:
             type: string
             format: binary
       responses:
-        201:
-          description: CREATED
+        200:
+          description: 'OK: Email was sent sucessfully'
+        400:
+          description: 'BAD_REQUEST: One or more destination addresses are incorrect'
+        500:
+          description: 'INTERNAL_ERROR: Unknown error occured'

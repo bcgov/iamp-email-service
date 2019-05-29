@@ -75,6 +75,7 @@
 							<generateModelTests>false</generateModelTests>
 							<modelPackage>ca.bc.gov.iamp.email.model</modelPackage>
 							<configOptions>
+								<hideGenerationTimestamp>true</hideGenerationTimestamp>
 								<sourceFolder>src/main/java</sourceFolder>
 								<dateLibrary>java8</dateLibrary>
 								<interfaceOnly>true</interfaceOnly>
