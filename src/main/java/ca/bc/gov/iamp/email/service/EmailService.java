@@ -29,7 +29,7 @@ public class EmailService {
 	@Async("threadPoolTaskExecutor")
 	public void sendMail(Mail mail) {
 		try {
-			log.info("Sending notification to [{}]", mail.getTo());
+			log.info("Sending email to [{}]", mail.getTo());
 			MimeMessage message = sender.createMimeMessage();
 			MimeMessageHelper helper = new MimeMessageHelper(message, true);
 
@@ -42,9 +42,7 @@ public class EmailService {
 			addAttachments(mail, helper);
 
 			sender.send(message);
-		} catch (IllegalArgumentException e) {
-			log.error(e.getMessage(), e);
-			throw new BadRequestException(e.getMessage());
+			log.info("Email sent successfully");
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 			throw new ServiceInternalException(e.getMessage());

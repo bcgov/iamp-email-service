@@ -18,7 +18,6 @@ import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mock.web.MockMultipartFile;
-import ca.bc.gov.iamp.api.exception.BadRequestException;
 import ca.bc.gov.iamp.api.exception.ServiceInternalException;
 import ca.bc.gov.iamp.email.model.Mail;
 
@@ -49,7 +48,7 @@ public class EmailServiceTest {
 		emailService.sendMail(null);
 	}
 
-	@Test(expected = BadRequestException.class)
+	@Test(expected = ServiceInternalException.class)
 	public void testEmptyMail() {
 		Mail mail = new Mail();
 		emailService.sendMail(mail);
