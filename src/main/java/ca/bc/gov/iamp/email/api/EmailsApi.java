@@ -47,9 +47,7 @@ public interface EmailsApi {
 
     @ApiOperation(value = "Sends a new email", nickname = "emailsPost", notes = "Endpoint used to send new emails", tags={  })
     @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "OK: Email was sent sucessfully"),
-        @ApiResponse(code = 400, message = "BAD_REQUEST: One or more destination addresses are incorrect"),
-        @ApiResponse(code = 500, message = "INTERNAL_ERROR: Unknown error occured") })
+        @ApiResponse(code = 200, message = "OK: Email request received sucessfully") })
     @RequestMapping(value = "/emails",
         consumes = { "multipart/form-data" },
         method = RequestMethod.POST)

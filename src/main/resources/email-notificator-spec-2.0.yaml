@@ -55,8 +55,4 @@ paths:
             format: binary
       responses:
         200:
-          description: 'OK: Email was sent sucessfully'
-        400:
-          description: 'BAD_REQUEST: One or more destination addresses are incorrect'
-        500:
-          description: 'INTERNAL_ERROR: Unknown error occured'
+          description: 'OK: Email request received sucessfully'
