@@ -2,9 +2,8 @@ package ca.bc.gov.iamp.email.model;
 
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.validation.annotation.Validated;
@@ -40,7 +39,7 @@ public class Mail   {
 
   @JsonProperty("attachments")
   @Valid
-  private List<org.springframework.web.multipart.MultipartFile> attachments = null;
+  private List<Attachment> attachments = null;
 
   public Mail subject(String subject) {
     this.subject = subject;
@@ -184,12 +183,12 @@ public class Mail   {
     this.body = body;
   }
 
-  public Mail attachments(List<org.springframework.web.multipart.MultipartFile> attachments) {
+  public Mail attachments(List<Attachment> attachments) {
     this.attachments = attachments;
     return this;
   }
 
-  public Mail addAttachmentsItem(org.springframework.web.multipart.MultipartFile attachmentsItem) {
+  public Mail addAttachmentsItem(Attachment attachmentsItem) {
     if (this.attachments == null) {
       this.attachments = new ArrayList<>();
     }
@@ -204,11 +203,11 @@ public class Mail   {
   @ApiModelProperty(value = "Upload multiple files")
 
 
-  public List<org.springframework.web.multipart.MultipartFile> getAttachments() {
+  public List<Attachment> getAttachments() {
     return attachments;
   }
 
-  public void setAttachments(List<org.springframework.web.multipart.MultipartFile> attachments) {
+  public void setAttachments(List<Attachment> attachments) {
     this.attachments = attachments;
   }
 

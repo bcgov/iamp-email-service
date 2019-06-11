@@ -19,6 +19,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mock.web.MockMultipartFile;
 import ca.bc.gov.iamp.api.exception.ServiceInternalException;
+import ca.bc.gov.iamp.email.model.Attachment;
 import ca.bc.gov.iamp.email.model.Mail;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -87,7 +88,7 @@ public class EmailServiceTest {
 		mail.setCc(Arrays.asList("cc@cc.com"));
 		mail.setBcc(Arrays.asList("bcc1@bcc.com", "bcc2@bcc.com"));
 		mail.setAttachments(Arrays
-				.asList(new MockMultipartFile("data", "filename.txt", "text/plain", "awesome email body".getBytes())));
+				.asList(new Attachment("filename.txt", "text/plain", "awesome email body".getBytes())));
 		return mail;
 	}
 }

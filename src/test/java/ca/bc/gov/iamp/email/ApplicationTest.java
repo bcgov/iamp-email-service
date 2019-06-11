@@ -59,7 +59,7 @@ public class ApplicationTest {
 	public void init() {
 		Awaitility.setDefaultPollInterval(100, TimeUnit.MILLISECONDS);
 		Awaitility.setDefaultPollDelay(Duration.ONE_SECOND);
-		Awaitility.setDefaultTimeout(Duration.TEN_SECONDS);
+		Awaitility.setDefaultTimeout(Duration.ONE_MINUTE);
 	}
 
 	@Test
