@@ -1,6 +1,6 @@
 {
   "externalConfig": {
-    "branch": "develop"
+    "branch": "master"
   },
   "ciConfig": {
     "codeSecurityStage": {
