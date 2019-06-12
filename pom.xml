@@ -12,9 +12,9 @@
 
 
 	<groupId>ca.bc.gov.iamp</groupId>
-	<artifactId>email-notificator</artifactId>
+	<artifactId>email-service</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
-	<name>email-notificator</name>
+	<name>email-service</name>
 	<description></description>
 
 	<dependencies>

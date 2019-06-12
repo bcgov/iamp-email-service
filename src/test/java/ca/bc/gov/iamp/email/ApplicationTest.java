@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Scanner;
 import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
 
@@ -23,6 +24,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -44,7 +46,7 @@ import ca.bc.gov.iamp.email.rules.SmtpServerRule;
 @TestPropertySource(locations = "classpath:application-testing.properties")
 public class ApplicationTest {
 
-	@Value("classpath:/sample/test-attachment.txt")
+	@Value("classpath:/sample/test-attachment.file")
 	private Resource attachment;
 
 	@LocalServerPort
@@ -70,21 +72,18 @@ public class ApplicationTest {
 		MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 		map.add("subject", "subject");
 		map.add("to", "to@to.com");
+		map.add("to", "to2@to2.com");
 		map.add("cc", "cc@cc.com");
 		map.add("bcc", "bcc@bcc.com");
 		map.add("body", "body");
-		// FileSystemResource a = new FileSystemResource(attachment.getFile());
-		// byte[] content = Files.toByteArray(attachment.getFile());
-		// ByteArrayResource r = new ByteArrayResource(content);
-		// map.add("attachments", r);
+		FileSystemResource a = new FileSystemResource(attachment.getFile());
+		map.add("attachments", a);
 
 		HttpEntity<MultiValueMap<String, Object>> entity = new HttpEntity<MultiValueMap<String, Object>>(map, headers);
 
 		ResponseEntity<String> response = restTemplate.exchange(createURLWithPort("/api/v1/emails"), HttpMethod.POST,
 				entity, String.class);
-		// String response =
-		// restTemplate.postForObject(createURLWithPort("/api/v1/emails"), map,
-		// String.class);
+
 		assertEquals(HttpStatus.OK, response.getStatusCode());
 		Awaitility.await().until(receivedMessagesGreaterThan(0));
 
@@ -117,7 +116,7 @@ public class ApplicationTest {
 			if (content instanceof String) {
 				assertEquals("body", content);
 			} else if (content instanceof InputStream) {
-				assertEquals(attachment.getInputStream(), (InputStream) content);
+				assertEquals(convertStreamToString(attachment.getInputStream()), convertStreamToString((InputStream) content));
 			} else if (content instanceof Message) {
 				Message message = (Message) content;
 				handleMessage(message);
@@ -137,6 +136,20 @@ public class ApplicationTest {
 		};
 	}
 
+	String convertStreamToString(InputStream is) {
+		Scanner s = null;
+		try {
+		    s = new Scanner(is).useDelimiter("\\A");
+		    return s.hasNext() ? s.next() : "";
+		} finally {
+			if (s != null) s.close();
+			if (is != null)
+				try {
+					is.close();
+				} catch (IOException e) {}
+		}
+	}
+	
 	private String createURLWithPort(String uri) {
 		return "http://localhost:" + port + uri;
 	}
