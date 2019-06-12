@@ -9,7 +9,5 @@ import org.springframework.test.context.TestPropertySource;
 @ComponentScan(basePackages = {"ca.bc.gov"}, excludeFilters = {} )
 @EnableAutoConfiguration(exclude = {})
 @TestPropertySource(locations = "classpath:application-testing.properties")
-
 public class TestConfiguration {
-
 }
