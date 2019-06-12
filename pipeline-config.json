@@ -1,0 +1,22 @@
+{
+  "externalConfig": {
+    "branch": "develop"
+  },
+  "ciConfig": {
+    "codeSecurityStage": {
+      "enable": false
+    }
+  },
+  "cdConfig": {
+    "ocpDevDeployment": {
+      "project": "ag-pssg-is-dev"
+    },
+    "ocpTestDeployment": {
+      "project": "ag-pssg-is-test"
+    },
+    "ocpProdDeployment": {
+      "project": "ag-pssg-is-prod",
+      "enable": false
+    }
+  }
+}
