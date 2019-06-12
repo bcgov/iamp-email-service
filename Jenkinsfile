@@ -1,3 +1,3 @@
 #!groovy
-@Library('iamp-jenkins-shared-lib@feature/add-storage-configs') _
+@Library('iamp-jenkins-shared-lib@feature/master') _
 IampSpringServicePipeline()
