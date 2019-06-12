@@ -21,6 +21,11 @@
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-mail</artifactId>
 		</dependency>
 
@@ -40,4 +45,49 @@
 
 	</dependencies>
 
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>io.swagger</groupId>
+				<artifactId>swagger-codegen-maven-plugin</artifactId>
+				<version>2.4.5</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<typeMappings>
+								<typeMapping>byte[]=org.springframework.web.multipart.MultipartFile</typeMapping>
+							</typeMappings>
+							<skipIfSpecIsUnchanged>false</skipIfSpecIsUnchanged>
+							<inputSpec>${project.basedir}/src/main/resources/email-notificator-spec-2.0.yaml</inputSpec>
+							<output>${project.basedir}</output>
+							<language>spring</language>
+							<library>spring-boot</library>
+							<generateSupportingFiles>false</generateSupportingFiles>
+							<apiPackage>ca.bc.gov.iamp.email.api</apiPackage>
+							<generateApis>true</generateApis>
+							<generateApiDocumentation>false</generateApiDocumentation>
+							<generateApiTests>false</generateApiTests>
+							<generateModels>true</generateModels>
+							<generateModelDocumentation>false</generateModelDocumentation>
+							<generateModelTests>false</generateModelTests>
+							<modelPackage>ca.bc.gov.iamp.email.model</modelPackage>
+							<configOptions>
+								<hideGenerationTimestamp>true</hideGenerationTimestamp>
+								<sourceFolder>src/main/java</sourceFolder>
+								<dateLibrary>java8</dateLibrary>
+								<interfaceOnly>true</interfaceOnly>
+								<java8>true</java8>
+								<configPackage>ca.bc.gov.iamp.email.config</configPackage>
+								<useBeanValidation>true</useBeanValidation>
+								<delegatePattern>true</delegatePattern>
+							</configOptions>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 </project>

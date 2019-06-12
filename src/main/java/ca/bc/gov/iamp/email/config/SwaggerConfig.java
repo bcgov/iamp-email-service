@@ -16,8 +16,9 @@ public class SwaggerConfig {
     public Docket api() { 
         return new Docket(DocumentationType.SWAGGER_2)  
           .select()
-          .apis(RequestHandlerSelectors.basePackage("ca.bc.gov.prime.adapter.api"))
+          .apis(RequestHandlerSelectors.basePackage("ca.bc.gov.iamp.email.api"))
           .paths(PathSelectors.any())
-          .build();                                           
+          .build()
+          .useDefaultResponseMessages(false);                                           
     }
 }
