@@ -5,6 +5,15 @@
   "ciConfig": {
     "codeSecurityStage": {
       "enable": false
+    },
+    "codeBuildStage": {
+      "enable": true,
+      "id": "build",
+      "name": "Build",
+      "engine" : {
+        "type": "maven",
+        "configDir": "external-config/build/maven"
+      }
     }
   },
   "cdConfig": {
