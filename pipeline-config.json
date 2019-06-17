@@ -1,31 +1,58 @@
 {
-  "externalConfig": {
-    "branch": "master"
-  },
-  "ciConfig": {
-    "codeSecurityStage": {
-      "enable": false
+    "externalConfig": 
+    {
+        "branch": "master"
     },
-    "codeBuildStage": {
-      "enable": true,
-      "id": "build",
-      "name": "Build",
-      "engine" : {
-        "type": "maven",
-        "configDir": "external-config/build/maven"
-      }
+
+    "ciConfig": 
+    {
+        "stages": 
+        {
+            "codeSecurityStage": 
+            {
+                "id": "security",
+                "enable": false
+            },
+
+            "codeBuildStage": 
+            {
+                "enable": true,
+                "id": "build",
+                "name": "Build",
+                "engine": 
+                {
+                    "type": "maven",
+                    "configDir": "external-config/build/maven"
+                }
+            }
+        }
+    },
+
+    "cdConfig": 
+    {
+        "deployments": 
+        {
+            "ocpDevDeployment": 
+            {
+                "env": "dev",
+                "cloudProvider": "ocp",
+                "project": "ag-pssg-is-dev"
+            },
+
+            "ocpTestDeployment": 
+            {
+                "env": "test",
+                "cloudProvider": "ocp",
+                "project": "ag-pssg-is-test"
+            },
+
+            "ocpProdDeployment": 
+            {
+                "env": "prod",
+                "cloudProvider": "ocp",
+                "project": "ag-pssg-is-prod",
+                "enable": false
+            }
+        }
     }
-  },
-  "cdConfig": {
-    "ocpDevDeployment": {
-      "project": "ag-pssg-is-dev"
-    },
-    "ocpTestDeployment": {
-      "project": "ag-pssg-is-test"
-    },
-    "ocpProdDeployment": {
-      "project": "ag-pssg-is-prod",
-      "enable": false
-    }
-  }
 }
