@@ -1,3 +1,3 @@
 #!groovy
-@Library('iamp-jenkins-shared-lib@v1.0.0') _
+@Library('iamp-jenkins-shared-lib@feature/fix-pipeline-model-oop') _
 IampSpringServicePipeline()
