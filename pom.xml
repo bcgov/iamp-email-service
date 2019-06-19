@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>ca.bc.gov.iamp</groupId>
+		<artifactId>spring-boot-api-service</artifactId>
+		<version>1.0.1-SNAPSHOT</version>
+	</parent>
+
+
+	<groupId>ca.bc.gov.iamp</groupId>
+	<artifactId>iamp-email-service</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<name>iamp-email-service</name>
+	<description></description>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<!-- Spring Starter Mail -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>
+		</dependency>
+
+		<!-- Spring Cloud Config -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-config</artifactId>
+		</dependency>
+
+		<!-- Test dependencies -->
+		<dependency>
+			<groupId>org.powermock</groupId>
+			<artifactId>powermock-api-mockito2</artifactId>
+			<version>2.0.0</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.icegreen</groupId>
+			<artifactId>greenmail</artifactId>
+			<version>1.5.10</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.awaitility</groupId>
+			<artifactId>awaitility</artifactId>
+			<version>3.0.0</version>
+			<scope>test</scope>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>io.swagger</groupId>
+				<artifactId>swagger-codegen-maven-plugin</artifactId>
+				<version>2.4.5</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<typeMappings>
+								<typeMapping>byte[]=org.springframework.web.multipart.MultipartFile</typeMapping>
+							</typeMappings>
+							<skipIfSpecIsUnchanged>false</skipIfSpecIsUnchanged>
+							<inputSpec>${project.basedir}/src/main/resources/email-notificator-spec-2.0.yaml</inputSpec>
+							<output>${project.basedir}</output>
+							<language>spring</language>
+							<library>spring-boot</library>
+							<generateSupportingFiles>false</generateSupportingFiles>
+							<apiPackage>ca.bc.gov.iamp.email.api</apiPackage>
+							<generateApis>true</generateApis>
+							<generateApiDocumentation>false</generateApiDocumentation>
+							<generateApiTests>false</generateApiTests>
+							<generateModels>true</generateModels>
+							<generateModelDocumentation>false</generateModelDocumentation>
+							<generateModelTests>false</generateModelTests>
+							<modelPackage>ca.bc.gov.iamp.email.model</modelPackage>
+							<configOptions>
+								<hideGenerationTimestamp>true</hideGenerationTimestamp>
+								<sourceFolder>src/main/java</sourceFolder>
+								<dateLibrary>java8</dateLibrary>
+								<interfaceOnly>true</interfaceOnly>
+								<java8>true</java8>
+								<configPackage>ca.bc.gov.iamp.email.config</configPackage>
+								<useBeanValidation>true</useBeanValidation>
+								<delegatePattern>true</delegatePattern>
+							</configOptions>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>
