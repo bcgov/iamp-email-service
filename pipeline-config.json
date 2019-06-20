@@ -1,7 +1,8 @@
 {
     "externalConfig": 
     {
-        "branch": "master"
+        "branch": "master",
+		"credentials": "iamp-jenkins-github"
     },
 
     "ciConfig": 
@@ -24,6 +25,13 @@
                     "type": "maven",
                     "configDir": "external-config/build/maven"
                 }
+            },
+			
+			"codeArchiveStage": 
+            {
+                "enable": true,
+                "id": "archive",
+				"credentials": "iamp-jenkins-nexus"
             }
         }
     },
