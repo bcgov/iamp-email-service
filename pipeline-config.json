@@ -31,7 +31,10 @@
             {
                 "enable": true,
                 "id": "archive",
-				"credentials": "iamp-jenkins-nexus"
+		"engine": 
+                {
+                    "credentials": "iamp-jenkins-nexus"
+                }
             }
         }
     },
