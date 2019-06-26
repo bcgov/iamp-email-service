@@ -33,6 +33,7 @@ import org.springframework.stereotype.Component;
 import ca.bc.gov.iamp.api.exception.ServiceInternalException;
 import ca.bc.gov.iamp.email.model.Attachment;
 import ca.bc.gov.iamp.email.model.Mail;
+import ca.bc.gov.iamp.email.util.ExponentialBackOff;
 
 @Component
 public class EmailService {
@@ -57,12 +58,18 @@ public class EmailService {
 			helper.setBcc(mail.getBcc() != null ? mail.getBcc().toArray(new String[0]) : new String[0]);
 			addAttachments(mail, helper);
 
-			sender.send(message);
+			ExponentialBackOff executor = new ExponentialBackOff();
+			executor.execute(() -> sendMessage(message));
 			log.info("Email sent successfully");
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 			throw new ServiceInternalException(e.getMessage());
 		}
+	}
+	
+	private boolean sendMessage(MimeMessage message) {
+		sender.send(message);
+		return true;
 	}
 
 	private void addAttachments(Mail mail, MimeMessageHelper helper) throws MessagingException {
