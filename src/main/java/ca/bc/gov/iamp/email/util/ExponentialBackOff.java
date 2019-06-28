@@ -76,8 +76,9 @@ public final class ExponentialBackOff {
 			Long timeToWait = FIBONACCI[attempt] * 1000L + (r.nextInt(1000));
 			log.debug("Trying again in {} milliseconds", timeToWait);
 			Thread.sleep(timeToWait);
-		} catch (InterruptedException e) {
-			throw new ServiceInternalException(e);
+		} catch (InterruptedException e) {    
+			log.warn("Interrupted", e);
+			Thread.currentThread().interrupt();
 		}
 	}
 }
