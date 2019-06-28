@@ -50,6 +50,15 @@
                 "project": "ag-pssg-is-dev",
 		"type": "recreate",
 		"replicas": "1",
+            },
+
+            "ocpTestDeployment": 
+            {
+                "env": "test",
+                "cloudProvider": "ocp",
+                "project": "ag-pssg-is-test",
+		"type": "blue-green",
+		"replicas": "2",
 		"providerConfig": 
 		{ 
 		    "autoScaling": 
@@ -59,15 +68,6 @@
 			"enabled": "true"
 	            }
 	    	}
-            },
-
-            "ocpTestDeployment": 
-            {
-                "env": "test",
-                "cloudProvider": "ocp",
-                "project": "ag-pssg-is-test",
-		"type": "blue-green",
-		"replicas": "2"
             },
 
             "ocpProdDeployment": 
