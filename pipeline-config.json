@@ -3,11 +3,42 @@
     "branch": "develop"
   },
   "cdConfig": {
-    "ocpTestDeployment": {
-      "type": "blue-green"
-    },
-    "ocpProdDeployment": {
-      "type": "blue-green"
+    "deployments": {
+      "ocpDevDeployment": {
+        "env": "dev",
+        "cloudProvider": "ocp",
+        "project": "ag-pssg-is-dev",
+        "type": "recreate",
+        "replicas": "1"
+      },
+      "ocpTestDeployment": {
+        "env": "test",
+        "cloudProvider": "ocp",
+        "project": "ag-pssg-is-test",
+        "type": "blue-green",
+        "replicas": "2",
+        "providerConfig": {
+          "autoScaling": {
+            "id": "autoscaling",
+            "type": "config",
+            "enabled": "true"
+          }
+        }
+      },
+      "ocpProdDeployment": {
+        "env": "prod",
+        "cloudProvider": "ocp",
+        "project": "ag-pssg-is-prod",
+        "type": "blue-green",
+        "replicas": "2",
+        "providerConfig": {
+          "autoScaling": {
+            "id": "autoscaling",
+            "type": "config",
+            "enabled": "true"
+          }
+        }
+      }
     }
   }
 }
