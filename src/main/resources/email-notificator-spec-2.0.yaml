@@ -1,0 +1,58 @@
+swagger: "2.0"
+info:
+  title: Email Service API
+  description: This API is responsible for sending emails.
+  version: 1.0.0
+basePath: /api/v1
+schemes:
+  - https
+paths:
+  /emails:
+    post:
+      summary: Sends a new email
+      description: Endpoint used to send new emails
+      consumes:
+       - multipart/form-data
+      parameters:
+        - name: subject
+          in: formData
+          description: Email Subject
+          required: false
+          type: string
+        - name: to
+          in: formData
+          description: Email TO
+          required: true
+          type: array
+          items:
+            type: string
+        - name: cc
+          in: formData
+          description: Email CC
+          required: false
+          type: array
+          items:
+            type: string
+        - name: bcc
+          in: formData
+          description: Email BCC
+          required: false
+          type: array
+          items:
+            type: string
+        - name: body
+          in: formData
+          description: Email Body
+          required: false
+          type: string
+        - name: attachments
+          in: formData
+          description: Upload multiple files
+          required: false
+          type: array
+          items:
+            type: string
+            format: binary
+      responses:
+        200:
+          description: 'OK: Email request received sucessfully'
