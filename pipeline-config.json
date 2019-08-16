@@ -1,7 +1,4 @@
 {
-  "externalConfig": {
-    "branch": "develop"
-  },
   "cdConfig": {
     "deployments": {
       "ocpDevDeployment": {
