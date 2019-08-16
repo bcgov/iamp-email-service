@@ -1,82 +1,13 @@
 {
-    "externalConfig": 
-    {
-        "branch": "master",
-		"credentials": "iamp-jenkins-github"
+  "externalConfig": {
+    "branch": "develop"
+  },
+  "cdConfig": {
+    "ocpTestDeployment": {
+      "type": "blue-green"
     },
-
-    "ciConfig": 
-    {
-        "stages": 
-        {
-            "codeSecurityStage": 
-            {
-                "id": "security",
-                "enable": false
-            },
-
-            "codeBuildStage": 
-            {
-                "enable": true,
-                "id": "build",
-                "name": "Build",
-                "engine": 
-                {
-                    "type": "maven",
-                    "configDir": "external-config/build/maven"
-                }
-            },
-			
-			"codeArchiveStage": 
-            {
-                "enable": true,
-                "id": "archive",
-		"engine": 
-                {
-                    "credentials": "iamp-jenkins-nexus"
-                }
-            }
-        }
-    },
-
-    "cdConfig": 
-    {
-        "deployments": 
-        {
-            "ocpDevDeployment": 
-            {
-                "env": "dev",
-                "cloudProvider": "ocp",
-                "project": "ag-pssg-is-dev",
-		"type": "recreate",
-		"replicas": "1",
-            },
-
-            "ocpTestDeployment": 
-            {
-                "env": "test",
-                "cloudProvider": "ocp",
-                "project": "ag-pssg-is-test",
-		"type": "blue-green",
-		"replicas": "2",
-		"providerConfig": 
-		{ 
-		    "autoScaling": 
-		    {
-		    	"id": "autoscaling",
-		    	"type": "config",
-			"enabled": "true"
-	            }
-	    	}
-            },
-
-            "ocpProdDeployment": 
-            {
-                "env": "prod",
-                "cloudProvider": "ocp",
-                "project": "ag-pssg-is-prod",
-                "enable": false
-            }
-        }
+    "ocpProdDeployment": {
+      "type": "blue-green"
     }
+  }
 }
